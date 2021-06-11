@@ -1,0 +1,6 @@
+[submodule "includedir/home/anon"]
+	path = includedir/home/anon
+	url = https://github.com/salahdin-ahmed/dotfiles
+[submodule "includedir/home/dotfiles"]
+	path = includedir/home/dotfiles
+	url = https://github.com/salahdin-ahmed/dotfiles
