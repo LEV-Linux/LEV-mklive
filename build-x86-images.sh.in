@@ -2,12 +2,14 @@
 
 ARCH=
 IMAGE=
+DIR=
 
-while getopts "a:b:hr:" opt; do
+while getopts "a:b:S:I:hr:" opt; do
 case $opt in
 	a) ARCH="$OPTARG";;
 	b) IMAGE="$OPTARG";;
-	h) echo "${0#/*}: [-a arch] [-b full|minimal] [-r repo]" >&2; exit 1;;
+	I) DIR="$OPTARG";;
+	h) echo "${0#/*}: [-a arch] [-b full|minimal] [-I directory] [-r repo]" >&2; exit 1;;
 	r) REPO="-r $OPTARG $REPO";;
 esac
 done
@@ -33,11 +35,19 @@ readonly FULL_PKGS="$MINIMAL_PKGS sxiv ImageMagick bottom task timewarrior picom
 
 if [ -z "$IMAGE" -o "$IMAGE" = full ]; then
 	if [ ! -e $FULL_IMG ]; then
-		./mklive.sh -a "$ARCH" -o "$FULL_IMG" -T "$TITLE" -p "$FULL_PKGS" ${REPO} -C "live live.autologin=1" "$@"
+		if [ ! -z "$DIR" ]; then
+			./mklive.sh -a "$ARCH" -o "$FULL_IMG" -T "$TITLE" -p "$FULL_PKGS" ${REPO} -C "live live.autologin=1" -I "$DIR" "$@"
+		else
+			./mklive.sh -a "$ARCH" -o "$FULL_IMG" -T "$TITLE" -p "$FULL_PKGS" ${REPO} -C "live live.autologin=1" "$@"
+		fi
 	fi
 fi
 if [ -z "$IMAGE" -o "$IMAGE" = minimal ]; then
 	if [ ! -e $MINIMAL_IMG ]; then
-		./mklive.sh -a "$ARCH" -o "$MINIMAL_IMG" -T "$TITLE" -p "$MINIMAL_PKGS" ${REPO} -C "live live.autologin=1" "$@"
+		if [ ! -z "$DIR" ]; then
+			./mklive.sh -a "$ARCH" -o "$MINIMAL_IMG" -T "$TITLE" -p "$MINIMAL_PKGS" ${REPO} -C "live live.autologin=1" -I "$DIR" "$@"
+		else
+			./mklive.sh -a "$ARCH" -o "$MINIMAL_IMG" -T "$TITLE" -p "$MINIMAL_PKGS" ${REPO} -C "live live.autologin=1" "$@"
+		fi
 	fi
 fi
