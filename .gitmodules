@@ -4,3 +4,21 @@
 [submodule "includedir/home/dotfiles"]
 	path = includedir/home/dotfiles
 	url = https://github.com/salahdin-ahmed/dotfiles
+[submodule "includedir/home/srcpkgs/dwm"]
+	path = includedir/home/srcpkgs/dwm
+	url = https://github.com/salahdin-ahmed/dwm
+[submodule "includedir/home/srcpkgs/slock"]
+	path = includedir/home/srcpkgs/slock
+	url = https://github.com/salahdin-ahmed/slock
+[submodule "includedir/home/srcpkgs/sent"]
+	path = includedir/home/srcpkgs/sent
+	url = https://github.com/salahdin-ahmed/sent
+[submodule "includedir/home/srcpkgs/st"]
+	path = includedir/home/srcpkgs/st
+	url = https://github.com/salahdin-ahmed/st
+[submodule "includedir/home/srcpkgs/dmenu"]
+	path = includedir/home/srcpkgs/dmenu
+	url = https://github.com/salahdin-ahmed/dmenu
+[submodule "includedir/home/srcpkgs/dwmblocks"]
+	path = includedir/home/srcpkgs/dwmblocks
+	url = https://github.com/salahdin-ahmed/dwmblocks
