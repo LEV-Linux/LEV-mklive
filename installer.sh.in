@@ -41,6 +41,7 @@ PARTITIONS_DONE=
 NETWORK_DONE=
 FILESYSTEMS_DONE=
 
+USER_SHELL=$(getent passwd | awk -F: -v user="anon" '$1 == user {print $NF}')
 TARGETDIR=/mnt/target
 LOG=/dev/tty8
 CONF_FILE=/tmp/.void-installer.conf
@@ -758,7 +759,7 @@ set_useraccount() {
     [ -z "$USERGROUPS_DONE" ] && return
     useradd -R $TARGETDIR -m -G $(get_option USERGROUPS) \
         -c "$(get_option USERNAME)" $(get_option USERLOGIN) \
-        -s $SHELL
+        -s "$USER_SHELL"
     echo "$(get_option USERLOGIN):$(get_option USERPASSWORD)" | \
         chpasswd -R $TARGETDIR -c SHA512
 }
@@ -1246,6 +1247,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
         rm -f $TARGETDIR/etc/sddm.conf
         # Remove live user.
         echo "Removing $USERNAME live user from targetdir ..." >$LOG
+        # sed -i "s,\/bin\/bash,\"$(getent passwd | awk -F: -v user=\"$USERNAME\" \'$1 == user {print $NF}\')\",g" $TARGETDIR/etc/default/useradd
         sed -i "s,GETTY_ARGS=\"--noclear -a $USERNAME\",GETTY_ARGS=\"--noclear\",g" $TARGETDIR/etc/sv/agetty-tty1/conf
         chroot $TARGETDIR userdel -r $USERNAME >$LOG 2>&1
         sed -i -e "/$USERNAME ALL=.*/d" $TARGETDIR/etc/sudoers
