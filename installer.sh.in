@@ -95,7 +95,7 @@ WIDGET_SIZE="10 70"
 DIALOG() {
     rm -f $ANSWER
     dialog --colors --keep-tite --no-shadow --no-mouse \
-        --backtitle "${BOLD}${WHITE}Void Linux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
+        --backtitle "${BOLD}${WHITE}LEV Linux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
         --cancel-label "Back" --aspect 20 "$@" 2>$ANSWER
     return $?
 }
@@ -103,7 +103,7 @@ DIALOG() {
 INFOBOX() {
     # Note: dialog --infobox and --keep-tite don't work together
     dialog --colors --no-shadow --no-mouse \
-        --backtitle "${BOLD}${WHITE}Void Linux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
+        --backtitle "${BOLD}${WHITE}LEV Linux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
         --title "${TITLE}" --aspect 20 --infobox "$@"
 }
 
@@ -670,7 +670,7 @@ menu_useraccount() {
 
     while true; do
         _preset=$(get_option USERLOGIN)
-        [ -z "$_preset" ] && _preset="void"
+        [ -z "$_preset" ] && _preset="lev"
         DIALOG --inputbox "Enter a primary login name:" ${INPUTSIZE} "$_preset"
         if [ $? -eq 0 ]; then
             set_option USERLOGIN "$(cat $ANSWER)"
@@ -683,7 +683,7 @@ menu_useraccount() {
 
     while true; do
         _preset=$(get_option USERNAME)
-        [ -z "$_preset" ] && _preset="Void User"
+        [ -z "$_preset" ] && _preset="LEV User"
         DIALOG --inputbox "Enter a user name for login '$(get_option USERLOGIN)' :" \
             ${INPUTSIZE} "$_preset"
         if [ $? -eq 0 ]; then
@@ -1348,7 +1348,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
     umount_filesystems
 
     # installed successfully.
-    DIALOG --yesno "${BOLD}Void Linux has been installed successfully!${RESET}\n
+    DIALOG --yesno "${BOLD}LEV Linux has been installed successfully!${RESET}\n
 Do you want to reboot the system?" ${YESNOSIZE}
     if [ $? -eq 0 ]; then
         shutdown -r now
@@ -1386,7 +1386,7 @@ menu() {
         AFTER_HOSTNAME="Timezone"
         DIALOG --default-item $DEFITEM \
             --extra-button --extra-label "Settings" \
-            --title " Void Linux installation menu " \
+            --title " LEV Linux installation menu " \
             --menu "$MENULABEL" 10 70 0 \
             "Keyboard" "Set system keyboard" \
             "Network" "Set up the network" \
@@ -1404,7 +1404,7 @@ menu() {
         AFTER_HOSTNAME="Locale"
         DIALOG --default-item $DEFITEM \
             --extra-button --extra-label "Settings" \
-            --title " Void Linux installation menu " \
+            --title " LEV Linux installation menu " \
             --menu "$MENULABEL" 10 70 0 \
             "Keyboard" "Set system keyboard" \
             "Network" "Set up the network" \
@@ -1463,11 +1463,14 @@ fi
 # main()
 #
 DIALOG --title "${BOLD}${RED} Enter the void ... ${RESET}" --msgbox "\n
-Welcome to the Void Linux installation. A simple and minimal \
-Linux distribution made from scratch and built from the source package tree \
-available for XBPS, a new alternative binary package system.\n\n
+Welcome to the LEV Linux installation. A bloated Linux distribution made on \
+top of Void Linux and built from the source package tree available for XBPS, \
+a new alternative binary package system used by Void Linux.\n\n
 The installation should be pretty straightforward. If you are in trouble \
-please join us at ${BOLD}#voidlinux${RESET} on ${BOLD}irc.freenode.org${RESET}.\n\n
+please join the discussion at ${BOLD}salahdin-ahmed/LEV-mklive${RESET} on \
+${BOLD}www.github.com${RESET} or join the void community at \
+${BOLD}#voidlinux${RESET} on \
+${BOLD}irc.freenode.org${RESET}.\n\n
 ${BOLD}https://www.voidlinux.org${RESET}\n\n" 16 80
 
 while true; do
