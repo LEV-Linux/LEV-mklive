@@ -760,6 +760,7 @@ set_useraccount() {
     useradd -R $TARGETDIR -m -G $(get_option USERGROUPS) \
         -c "$(get_option USERNAME)" $(get_option USERLOGIN) \
         -s "$USER_SHELL"
+    cp -r /home/dotfiles/.* $TARGETDIR/home/$(get_option USERLOGIN)/
     echo "$(get_option USERLOGIN):$(get_option USERPASSWORD)" | \
         chpasswd -R $TARGETDIR -c SHA512
 }
