@@ -11,7 +11,7 @@ case $opt in
 	b) IMAGE="$OPTARG";;
 	S) SH="$OPTARG";;
 	I) DIR="$OPTARG";;
-	h) echo "${0#/*}: [-a arch] [-b full|minimal] [-S shell] [-I directory] [-r repo]" >&2; exit 1;;
+	h) echo "${0#/*}: [-a arch] [-b full|functional|minimal] [-S shell] [-I directory] [-r repo]" >&2; exit 1;;
 	r) REPO="-r $OPTARG $REPO";;
 esac
 done
@@ -22,6 +22,7 @@ shift $((OPTIND - 1))
 
 readonly DATE=$(date +%Y%m%d)
 readonly FULL_IMG=LEV-live-${ARCH}-${DATE}-full.iso
+readonly FUNCTIONAL_IMG=LEV-live-${ARCH}-${DATE}-functional.iso
 readonly MINIMAL_IMG=LEV-live-${ARCH}-${DATE}-minimal.iso
 
 readonly TITLE="LEV Linux"
@@ -30,8 +31,9 @@ readonly GRUB="grub-i386-efi grub-x86_64-efi"
 
 readonly BASE_PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse $GRUB"
 readonly X_PKGS="$BASE_PKGS xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf alsa-plugins-pulseaudio"
-readonly MINIMAL_PKGS="$X_PKGS zsh zsh-autosuggestions zsh-syntax-highlighting neovim htop git opendoas nnn fzf wget make gcc brillo kmonad xtools ffmpeg mpv"
-readonly FULL_PKGS="$MINIMAL_PKGS sxiv ImageMagick bottom task timewarrior picom make pywal xwinwrap sxhkd libX11-devel libXinerama-devel libXft-devel fontconfig-devel font-awesome xdotool xdo qutebrowser zathura"
+readonly MINIMAL_PKGS="$X_PKGS zsh zsh-autosuggestions zsh-syntax-highlighting neovim htop git opendoas nnn fzf wget make cmake gcc brillo kmonad xtools python"
+readonly FUNCTIONAL_PKGS="$MINIMAL_PKGS dwm st dmenu qutebrowser zathura zathura-pdf-poppler sxhkd sxiv mpv"
+readonly FULL_PKGS="$FUNCTIONAL_PKGS ImageMagick ffmpeg bottom task timewarrior picom pywal xwinwrap libX11-devel libXinerama-devel libXft-devel fontconfig-devel font-awesome xdotool xdo zathura-ps github-cli grip ripgrep go neomutt pass"
 
 [ ! -x mklive.sh ] && exit 0
 
@@ -44,6 +46,17 @@ if [ -z "$IMAGE" -o "$IMAGE" = full ]; then
 		fi
 	fi
 fi
+
+if [ -z "$IMAGE" -o "$IMAGE" = functional ]; then
+	if [ ! -e $FUNCTIONAL_IMG ]; then
+		if [ ! -z "$DIR" ]; then
+			./mklive.sh -a "$ARCH" -o "$FUNCTIONAL_IMG" -T "$TITLE" -p "$FUNCTIONAL_PKGS" ${REPO} -C "live live.shell=$SH live.autologin=1" -I "$DIR" "$@"
+		else
+			./mklive.sh -a "$ARCH" -o "$FUNCTIONAL_IMG" -T "$TITLE" -p "$FUNCTIONAL_PKGS" ${REPO} -C "live live.shell=$SH live.autologin=1" "$@"
+		fi
+	fi
+fi
+
 if [ -z "$IMAGE" -o "$IMAGE" = minimal ]; then
 	if [ ! -e $MINIMAL_IMG ]; then
 		if [ ! -z "$DIR" ]; then
