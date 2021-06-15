@@ -81,6 +81,6 @@ install() {
     # do this...
     sed -i "s:shutdown -r now:sync && reboot -f:" "$moddir/installer.sh"
 
-    inst "$moddir/installer.sh" /usr/bin/void-installer
+    inst "$moddir/installer.sh" /usr/bin/lev-installer
     inst_hook pre-mount 05 "$moddir/netmenu.sh"
 }
