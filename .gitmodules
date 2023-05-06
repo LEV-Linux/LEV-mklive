@@ -1,0 +1,21 @@
+[submodule "skel"]
+	path = includedir/etc/skel
+	url = https://github.com/lev-linux/dotfiles.git
+[submodule "includedir/var/cache/distfiles/slock"]
+	path = includedir/var/cache/distfiles/slock
+	url = https://github.com/lev-linux/slock.git
+[submodule "includedir/var/cache/distfiles/st"]
+	path = includedir/var/cache/distfiles/st
+	url = https://github.com/lev-linux/st.git
+[submodule "includedir/var/cache/distfiles/dwm"]
+	path = includedir/var/cache/distfiles/dwm
+	url = https://github.com/lev-linux/dwm.git
+[submodule "includedir/var/cache/distfiles/dmenu"]
+	path = includedir/var/cache/distfiles/dmenu
+	url = https://github.com/lev-linux/dmenu.git
+[submodule "includedir/var/cache/distfiles/xciao"]
+	path = includedir/var/cache/distfiles/xciao
+	url = https://github.com/lev-linux/xciao.git
+[submodule "includedir/var/cache/distfiles/dwmblocks"]
+	path = includedir/var/cache/distfiles/dwmblocks
+	url = https://github.com/lev-linux/dwmblocks.git
