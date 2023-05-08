@@ -73,7 +73,7 @@ build_variant() {
         ;;
     esac
 
-    ./mklive.sh -a "$ARCH" -o "$IMG" -p "$PKGS" -S "$SERVICES" ${REPO} "$@"
+    ./mklive.sh -a "$ARCH" -o "$IMG" -T "LEV Linux" -C "live live.shell=/bin/fish live.autologin=1" -I "includedir/" -p "$PKGS" -S "$SERVICES" ${REPO} "$@"
 }
 
 if [ ! -x mklive.sh ]; then
