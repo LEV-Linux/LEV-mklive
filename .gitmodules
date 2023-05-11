@@ -19,3 +19,21 @@
 [submodule "includedir/var/cache/distfiles/dwmblocks"]
 	path = includedir/var/cache/distfiles/dwmblocks
 	url = https://github.com/lev-linux/dwmblocks.git
+[submodule "includedir/var/distfiles/dwm"]
+	path = includedir/var/distfiles/dwm
+	url = https://github.com/lev-linux/dwm.git
+[submodule "includedir/var/distfiles/st"]
+	path = includedir/var/distfiles/st
+	url = https://github.com/lev-linux/st.git
+[submodule "includedir/var/distfiles/dmenu"]
+	path = includedir/var/distfiles/dmenu
+	url = https://github.com/lev-linux/dmenu.git
+[submodule "includedir/var/distfiles/slock"]
+	path = includedir/var/distfiles/slock
+	url = https://github.com/lev-linux/slock.git
+[submodule "includedir/var/distfiles/xciao"]
+	path = includedir/var/distfiles/xciao
+	url = https://github.com/lev-linux/xciao.git
+[submodule "includedir/var/distfiles/dwmblocks"]
+	path = includedir/var/distfiles/dwmblocks
+	url = https://github.com/lev-linux/dwmblocks.git

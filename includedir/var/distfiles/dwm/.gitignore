@@ -1,8 +1,0 @@
-*.diff
-*.o
-*.orig
-*.rej
-config.h
-tags
-dwm
-dwmc
